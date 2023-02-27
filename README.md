@@ -21,3 +21,5 @@ https://springframework.guru/exception-handling-in-spring-boot-rest-api/
 error  handling and finish the crud paths
 
 fully utilize docker for dev environment...
+
+DEFAULT uuid_generate_v1()

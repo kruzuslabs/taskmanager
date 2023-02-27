@@ -6,12 +6,15 @@ import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "main_tasks", schema = "public", catalog = "taskdb")
+@Table(name = "main_tasks", schema = "public", catalog = "tasks_db")
 public class TasksEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "task_id", nullable = false)
     private long taskId;
+    @Basic
+    @Column(name = "posted_by", nullable = true)
+    private Object postedBy;
     @Basic
     @Column(name = "title", nullable = true, length = -1)
     private String title;
@@ -22,11 +25,8 @@ public class TasksEntity {
     @Column(name = "date", nullable = true)
     private Date date;
     @Basic
-    @Column(name = "user_id", nullable = false)
-    private long userId;
-    @Basic
-    @Column(name = "completed", nullable = true)
-    private Boolean completed;
+    @Column(name = "completed", nullable = false)
+    private boolean completed;
 
     public long getTaskId() {
         return taskId;
@@ -34,6 +34,14 @@ public class TasksEntity {
 
     public void setTaskId(long taskId) {
         this.taskId = taskId;
+    }
+
+    public Object getPostedBy() {
+        return postedBy;
+    }
+
+    public void setPostedBy(Object postedBy) {
+        this.postedBy = postedBy;
     }
 
     public String getTitle() {
@@ -60,19 +68,11 @@ public class TasksEntity {
         this.date = date;
     }
 
-    public long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(long userId) {
-        this.userId = userId;
-    }
-
-    public Boolean getCompleted() {
+    public boolean isCompleted() {
         return completed;
     }
 
-    public void setCompleted(Boolean completed) {
+    public void setCompleted(boolean completed) {
         this.completed = completed;
     }
 
@@ -81,11 +81,11 @@ public class TasksEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TasksEntity that = (TasksEntity) o;
-        return taskId == that.taskId && userId == that.userId && Objects.equals(title, that.title) && Objects.equals(body, that.body) && Objects.equals(date, that.date) && Objects.equals(completed, that.completed);
+        return taskId == that.taskId && completed == that.completed && Objects.equals(postedBy, that.postedBy) && Objects.equals(title, that.title) && Objects.equals(body, that.body) && Objects.equals(date, that.date);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(taskId, title, body, date, userId, completed);
+        return Objects.hash(taskId, postedBy, title, body, date, completed);
     }
 }
