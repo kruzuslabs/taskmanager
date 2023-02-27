@@ -12,3 +12,12 @@ Project Overview
 
 This is a simple CRUD project, that lets the
 user create an account, and manage tasks.
+
+
+TODO:
+
+https://springframework.guru/exception-handling-in-spring-boot-rest-api/ 
+
+error  handling and finish the crud paths
+
+fully utilize docker for dev environment...
