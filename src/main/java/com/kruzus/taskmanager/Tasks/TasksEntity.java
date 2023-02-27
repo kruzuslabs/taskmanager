@@ -1,35 +1,38 @@
 package com.kruzus.taskmanager.Tasks;
 
-import com.fasterxml.jackson.annotation.JsonSetter;
 import jakarta.persistence.*;
 
+import java.sql.Date;
 import java.util.Objects;
 
-@Entity(name = "TaskEntity")
-@Table(name = "tasks", schema = "public", catalog = "taskdb")
+@Entity
+@Table(name = "main_tasks", schema = "public", catalog = "taskdb")
 public class TasksEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "taskID", nullable = false, unique = true)
-    public int taskId;
+    @Column(name = "task_id", nullable = false)
+    private long taskId;
     @Basic
     @Column(name = "title", nullable = true, length = -1)
-    public String title;
+    private String title;
     @Basic
     @Column(name = "body", nullable = true, length = -1)
-    public String body;
+    private String body;
     @Basic
-    @Column(name = "date", nullable = true, length = -1)
-    public String date;
+    @Column(name = "date", nullable = true)
+    private Date date;
     @Basic
-    @Column(name = "userID", nullable = true, length = -1)
-    public String userId;
+    @Column(name = "user_id", nullable = false)
+    private long userId;
+    @Basic
+    @Column(name = "completed", nullable = true)
+    private Boolean completed;
 
-    public int getTaskId() {
+    public long getTaskId() {
         return taskId;
     }
 
-    public void setTaskId(int taskId) {
+    public void setTaskId(long taskId) {
         this.taskId = taskId;
     }
 
@@ -49,20 +52,28 @@ public class TasksEntity {
         this.body = body;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
-    public String getUserId() {
+    public long getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(long userId) {
         this.userId = userId;
+    }
+
+    public Boolean getCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(Boolean completed) {
+        this.completed = completed;
     }
 
     @Override
@@ -70,11 +81,11 @@ public class TasksEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TasksEntity that = (TasksEntity) o;
-        return taskId == that.taskId && Objects.equals(title, that.title) && Objects.equals(body, that.body) && Objects.equals(date, that.date) && Objects.equals(userId, that.userId);
+        return taskId == that.taskId && userId == that.userId && Objects.equals(title, that.title) && Objects.equals(body, that.body) && Objects.equals(date, that.date) && Objects.equals(completed, that.completed);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(taskId, title, body, date, userId);
+        return Objects.hash(taskId, title, body, date, userId, completed);
     }
 }
