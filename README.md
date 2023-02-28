@@ -35,3 +35,6 @@ java -jar final.jar \
 --spring.datasource.password=<password> \
 --spring.datasource.driver-class-name=org.postgresql.Driver 
 
+# Other Links
+
+[memory usage reduce](https://stackoverflow.com/questions/44491257/how-to-reduce-spring-boot-memory-usage)
