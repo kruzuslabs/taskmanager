@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.sql.Date;
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 @Table(name = "main_users", schema = "public", catalog = "tasks_db")
@@ -11,7 +12,7 @@ public class UsersEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id", nullable = false)
-    private Object id;
+    private UUID id;
     @Basic
     @Column(name = "username", nullable = true, length = -1)
     private String username;
@@ -28,11 +29,11 @@ public class UsersEntity {
     @Column(name = "total_posts", nullable = true)
     private Integer totalPosts;
 
-    public Object getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Object id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
