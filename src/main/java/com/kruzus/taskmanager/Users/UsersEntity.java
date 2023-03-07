@@ -1,6 +1,8 @@
 package com.kruzus.taskmanager.Users;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.sql.Date;
 import java.util.Objects;
@@ -9,8 +11,10 @@ import java.util.UUID;
 @Entity
 @Table(name = "main_users", schema = "public", catalog = "tasks_db")
 public class UsersEntity {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Id
+    @UuidGenerator
+    @GeneratedValue
     @Column(name = "id", nullable = false)
     private UUID id;
     @Basic
