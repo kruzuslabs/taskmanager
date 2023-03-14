@@ -1,11 +1,10 @@
 package com.kruzus.taskmanager.Users;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -37,12 +36,16 @@ public class UsersController {
 
 
     @GetMapping("/profile/{id}")
-    public Object findUserByID(@PathVariable UUID id) {
-      try {
+    public Object findUserByID(@PathVariable UUID id)   {
+        var user = this.userRepository.findById(id);
+
+        System.out.println("VALUE OF USER: " + user);
+        System.out.println("USER PRESENTS?: " + user.isPresent());
+
+
           return this.userRepository.findById(id);
-      } catch (Exception _e) {
-          return Map.of("error","user not found");
-      }
+
     }
+
 
 }
