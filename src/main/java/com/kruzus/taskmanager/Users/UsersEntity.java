@@ -1,21 +1,16 @@
 package com.kruzus.taskmanager.Users;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.UuidGenerator;
 
-import java.sql.Date;
 import java.util.Objects;
-import java.util.UUID;
 
 @Entity
-@Table(name = "main_users", schema = "public", catalog = "tasks_db")
+@Table(name = "main_users", schema = "public", catalog = "taskdb")
 public class UsersEntity {
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @UuidGenerator
-    @GeneratedValue
-    @Column(name = "id", nullable = false)
-    private UUID id;
+    @Column(name = "user_id", nullable = false)
+    private long userId;
     @Basic
     @Column(name = "username", nullable = true, length = -1)
     private String username;
@@ -23,21 +18,18 @@ public class UsersEntity {
     @Column(name = "password", nullable = true, length = -1)
     private String password;
     @Basic
-    @Column(name = "joined", nullable = true)
-    private Date joined;
-    @Basic
-    @Column(name = "country", nullable = true, length = -1)
-    private String country;
-    @Basic
     @Column(name = "total_posts", nullable = true)
     private Integer totalPosts;
+    @Basic
+    @Column(name = "registered_at", nullable = true, length = -1)
+    private String registeredAt;
 
-    public UUID getId() {
-        return id;
+    public long getUserId() {
+        return userId;
     }
 
-    public void setId(UUID id) {
-        this.id = id;
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 
     public String getUsername() {
@@ -56,22 +48,6 @@ public class UsersEntity {
         this.password = password;
     }
 
-    public Date getJoined() {
-        return joined;
-    }
-
-    public void setJoined(Date joined) {
-        this.joined = joined;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
     public Integer getTotalPosts() {
         return totalPosts;
     }
@@ -80,16 +56,24 @@ public class UsersEntity {
         this.totalPosts = totalPosts;
     }
 
+    public String getRegisteredAt() {
+        return registeredAt;
+    }
+
+    public void setRegisteredAt(String registeredAt) {
+        this.registeredAt = registeredAt;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UsersEntity that = (UsersEntity) o;
-        return Objects.equals(id, that.id) && Objects.equals(username, that.username) && Objects.equals(password, that.password) && Objects.equals(joined, that.joined) && Objects.equals(country, that.country) && Objects.equals(totalPosts, that.totalPosts);
+        return userId == that.userId && Objects.equals(username, that.username) && Objects.equals(password, that.password) && Objects.equals(totalPosts, that.totalPosts) && Objects.equals(registeredAt, that.registeredAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, password, joined, country, totalPosts);
+        return Objects.hash(userId, username, password, totalPosts, registeredAt);
     }
 }

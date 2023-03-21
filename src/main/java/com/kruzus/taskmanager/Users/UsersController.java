@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
+
 
 @RestController
 @RequestMapping("/users")
@@ -36,7 +36,7 @@ public class UsersController {
 
 
     @GetMapping("/profile/{id}")
-    public Object findUserByID(@PathVariable UUID id)   {
+    public Object findUserByID(@PathVariable long id)   {
         var user = this.userRepository.findById(id);
 
         System.out.println("VALUE OF USER: " + user);

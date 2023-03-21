@@ -1,6 +1,7 @@
 package com.kruzus.taskmanager.Tasks;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,7 +32,8 @@ public class TaskController {
     @GetMapping("/all")
     public List<TasksEntity> allTasks(){
 
-        return this.taskRepository.findAll();
+
+        return this.taskRepository.findOrderDescByID();
 }
 
 
