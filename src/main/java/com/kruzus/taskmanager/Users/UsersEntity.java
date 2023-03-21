@@ -1,7 +1,6 @@
 package com.kruzus.taskmanager.Users;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.sql.Date;
