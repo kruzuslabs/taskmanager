@@ -1,0 +1,4 @@
+SELECT to_char(now(), 'hh:MI:SS AM') as timePosted, to_char(now(), 'mm/dd/yyyy') as date;
+
+
+-- SET TIME ZONE 'America/New_York';
