@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: my_postgres
+    environment:
+      POSTGRES_PASSWORD: postgrespw
+      PGDATA: /var/lib/postgresql/data
+    volumes:
+      - /var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: my_pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin.org
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION: 'True'
+      PGADMIN_CONFIG_LOGIN_BANNER: 'Welcome to pgAdmin4'
+      PGADMIN_SERVER_JSON_FILE: '/pgadmin4/servers.json'
+    volumes:
+      - /Volumes/dataofthekills:/var/lib/pgadmin
+      - ./servers.json:/pgadmin4/servers.json
+    ports:
+      - "5050:80"
+    restart: 'no'

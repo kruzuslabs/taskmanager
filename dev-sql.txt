@@ -2,3 +2,49 @@ SELECT to_char(now(), 'hh:MI:SS AM') as timePosted, to_char(now(), 'mm/dd/yyyy')
 
 
 -- SET TIME ZONE 'America/New_York';
+
+-- Table: public.main_tasks
+
+-- DROP TABLE IF EXISTS public.main_tasks;
+
+CREATE TABLE IF NOT EXISTS public.main_tasks
+(
+    id bigint NOT NULL DEFAULT nextval('main_tasks2_id_seq'::regclass),
+    title text COLLATE pg_catalog."default",
+    body text COLLATE pg_catalog."default",
+    "dueDate" text COLLATE pg_catalog."default" DEFAULT to_char(now(), 'mm/dd/yyyy'::text),
+    "timePosted" text COLLATE pg_catalog."default" NOT NULL DEFAULT to_char(now(), 'hh:MI:SS AM'::text),
+    user_id bigint,
+    "isCompleted" boolean NOT NULL DEFAULT false,
+    "severity " smallint NOT NULL DEFAULT 1,
+    CONSTRAINT main_tasks2_pkey PRIMARY KEY (id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.main_tasks
+    OWNER to postgres;
+
+
+
+-- Table: public.main_users
+
+-- DROP TABLE IF EXISTS public.main_users;
+
+CREATE TABLE IF NOT EXISTS public.main_users
+(
+    id bigint NOT NULL DEFAULT nextval('main_users_id_seq'::regclass),
+    username character(40) COLLATE pg_catalog."default",
+    fullname character(40) COLLATE pg_catalog."default",
+    password character(100) COLLATE pg_catalog."default",
+    joined text COLLATE pg_catalog."default" NOT NULL DEFAULT to_char(now(), 'mm/dd/yyyy'::text),
+    "totalPosts" smallint NOT NULL DEFAULT 0,
+    CONSTRAINT main_users_pkey PRIMARY KEY (id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.main_users
+    OWNER to postgres;
+
+docker run --hostname=7fc3b5a61ba5 --env=POSTGRES_PASSWORD=postgrespw --env=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/postgresql/15/bin --env=GOSU_VERSION=1.14 --env=LANG=en_US.utf8 --env=PG_MAJOR=15 --env=TZ=America/New_York --env=PG_VERSION=15.1-1.pgdg110+1 --env=PGDATA=/var/lib/postgresql/data --volume=/var/lib/postgresql/data -p 5432 --label='com.docker/featured-image=postgres:latest' --runtime=runc -d postgres:latest

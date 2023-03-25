@@ -5,31 +5,34 @@ import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "main_users", schema = "public", catalog = "taskdb")
+@Table(name = "main_users", schema = "public", catalog = "postgres")
 public class UsersEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "user_id", nullable = false)
-    private long userId;
+    @Column(name = "userid", nullable = false)
+    private long userid;
     @Basic
-    @Column(name = "username", nullable = true, length = -1)
+    @Column(name = "username", nullable = true, length = 50)
     private String username;
     @Basic
-    @Column(name = "password", nullable = true, length = -1)
+    @Column(name = "fullname", nullable = true, length = 50)
+    private String fullname;
+    @Basic
+    @Column(name = "password", nullable = true, length = 100)
     private String password;
     @Basic
-    @Column(name = "total_posts", nullable = true)
-    private Integer totalPosts;
+    @Column(name = "joined", nullable = false, length = -1)
+    private String joined;
     @Basic
-    @Column(name = "registered_at", nullable = true, length = -1)
-    private String registeredAt;
+    @Column(name = "totaltasks", nullable = false)
+    private short totaltasks;
 
-    public long getUserId() {
-        return userId;
+    public long getUserid() {
+        return userid;
     }
 
-    public void setUserId(long userId) {
-        this.userId = userId;
+    public void setUserid(long userid) {
+        this.userid = userid;
     }
 
     public String getUsername() {
@@ -40,6 +43,14 @@ public class UsersEntity {
         this.username = username;
     }
 
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -48,20 +59,20 @@ public class UsersEntity {
         this.password = password;
     }
 
-    public Integer getTotalPosts() {
-        return totalPosts;
+    public String getJoined() {
+        return joined;
     }
 
-    public void setTotalPosts(Integer totalPosts) {
-        this.totalPosts = totalPosts;
+    public void setJoined(String joined) {
+        this.joined = joined;
     }
 
-    public String getRegisteredAt() {
-        return registeredAt;
+    public short getTotaltasks() {
+        return totaltasks;
     }
 
-    public void setRegisteredAt(String registeredAt) {
-        this.registeredAt = registeredAt;
+    public void setTotaltasks(short totaltasks) {
+        this.totaltasks = totaltasks;
     }
 
     @Override
@@ -69,11 +80,11 @@ public class UsersEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UsersEntity that = (UsersEntity) o;
-        return userId == that.userId && Objects.equals(username, that.username) && Objects.equals(password, that.password) && Objects.equals(totalPosts, that.totalPosts) && Objects.equals(registeredAt, that.registeredAt);
+        return userid == that.userid && totaltasks == that.totaltasks && Objects.equals(username, that.username) && Objects.equals(fullname, that.fullname) && Objects.equals(password, that.password) && Objects.equals(joined, that.joined);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, username, password, totalPosts, registeredAt);
+        return Objects.hash(userid, username, fullname, password, joined, totaltasks);
     }
 }

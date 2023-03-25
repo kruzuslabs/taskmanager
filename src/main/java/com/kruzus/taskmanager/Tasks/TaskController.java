@@ -10,17 +10,10 @@ import java.util.Optional;
 
 //@CrossOrigin
 @RestController
-@RequestMapping("/tasks")
+@RequestMapping("/api/tasks")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class TaskController {
 
-    /*
-    * users can list all tasks,
-    * create a new task,
-    * delete a task,
-    * update the task,
-    *
-    * mark for completed: PATCH or PUT
-    * */
 
     private final TaskRepository taskRepository;
 
@@ -37,11 +30,26 @@ public class TaskController {
 }
 
 
+    @GetMapping("/")
+    public Object helloMain(){
+        return "lols";
+    }
+
+    @PostMapping("/new")
+    public TasksEntity createTask(@RequestBody TasksEntity task) {
+        // Save the new task in the database using JPA
+        return taskRepository.save(task);
+    }
+
+
     //@TODO: Work on Exceptions..,
     @GetMapping("/{id}")
     public Optional<TasksEntity> oneTask(@PathVariable Long id) {
         return this.taskRepository.findById(id);
     }
+
+
+
 
 }
 

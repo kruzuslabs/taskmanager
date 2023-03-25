@@ -2,16 +2,15 @@ package com.kruzus.taskmanager.Tasks;
 
 import jakarta.persistence.*;
 
-import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "main_tasks", schema = "public", catalog = "taskdb")
+@Table(name = "tasks", schema = "public", catalog = "postgres")
 public class TasksEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "task_id", nullable = false)
-    private long taskId;
+    @Column(name = "id", nullable = false)
+    private long id;
     @Basic
     @Column(name = "title", nullable = true, length = -1)
     private String title;
@@ -19,21 +18,24 @@ public class TasksEntity {
     @Column(name = "body", nullable = true, length = -1)
     private String body;
     @Basic
-    @Column(name = "date", nullable = true)
-    private Date date;
+    @Column(name = "due_date", nullable = false, length = -1)
+    private String dueDate;
     @Basic
-    @Column(name = "user_id", nullable = false)
-    private long userId;
+    @Column(name = "time_posted", nullable = false, length = -1)
+    private String timePosted;
     @Basic
-    @Column(name = "completed", nullable = true)
-    private Boolean completed;
+    @Column(name = "completed", nullable = false)
+    private boolean completed;
+    @Basic
+    @Column(name = "severity", nullable = false)
+    private short severity;
 
-    public long getTaskId() {
-        return taskId;
+    public long getId() {
+        return id;
     }
 
-    public void setTaskId(long taskId) {
-        this.taskId = taskId;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -52,28 +54,36 @@ public class TasksEntity {
         this.body = body;
     }
 
-    public Date getDate() {
-        return date;
+    public String getDueDate() {
+        return dueDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDueDate(String dueDate) {
+        this.dueDate = dueDate;
     }
 
-    public long getUserId() {
-        return userId;
+    public String getTimePosted() {
+        return timePosted;
     }
 
-    public void setUserId(long userId) {
-        this.userId = userId;
+    public void setTimePosted(String timePosted) {
+        this.timePosted = timePosted;
     }
 
-    public Boolean getCompleted() {
+    public boolean isCompleted() {
         return completed;
     }
 
-    public void setCompleted(Boolean completed) {
+    public void setCompleted(boolean completed) {
         this.completed = completed;
+    }
+
+    public short getSeverity() {
+        return severity;
+    }
+
+    public void setSeverity(short severity) {
+        this.severity = severity;
     }
 
     @Override
@@ -81,11 +91,11 @@ public class TasksEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TasksEntity that = (TasksEntity) o;
-        return taskId == that.taskId && userId == that.userId && Objects.equals(title, that.title) && Objects.equals(body, that.body) && Objects.equals(date, that.date) && Objects.equals(completed, that.completed);
+        return id == that.id && completed == that.completed && severity == that.severity && Objects.equals(title, that.title) && Objects.equals(body, that.body) && Objects.equals(dueDate, that.dueDate) && Objects.equals(timePosted, that.timePosted);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(taskId, title, body, date, userId, completed);
+        return Objects.hash(id, title, body, dueDate, timePosted, completed, severity);
     }
 }

@@ -11,6 +11,6 @@ import java.util.List;
 public interface TaskRepository extends JpaRepository<TasksEntity, Long> {
 
 
-    @Query(value = "SELECT t FROM TasksEntity t ORDER BY t.taskId DESC")
+    @Query(value = "SELECT t FROM TasksEntity  t ORDER BY t.id DESC")
     List<TasksEntity> findOrderDescByID();
 }
