@@ -38,14 +38,16 @@ public class TaskController {
     @PostMapping("/new")
     public TasksEntity createTask(@RequestBody TasksEntity task) {
         // Save the new task in the database using JPA
-        return taskRepository.save(task);
+        return this.taskRepository.save(task);
     }
 
 
     //@TODO: Work on Exceptions..,
     @GetMapping("/{id}")
     public Optional<TasksEntity> oneTask(@PathVariable Long id) {
-        return this.taskRepository.findById(id);
+
+      return this.taskRepository.findById(id);
+
     }
 
 
