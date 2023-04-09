@@ -13,7 +13,7 @@ import javax.sql.DataSource;
 public class DatabaseConfig {
 
     @Bean
-    DataSource dataSource() {
+    public DataSource dataSource() {
         return DataSourceBuilder.create()
                 .driverClassName("org.postgresql.Driver")
                 .url("jdbc:postgresql://localhost:9050/tasksdb")
@@ -23,7 +23,7 @@ public class DatabaseConfig {
     }
 
     @Bean
-    DataSourceInitializer dataSourceInitializer(DataSource dataSource) {
+    public DataSourceInitializer dataSourceInitializer(DataSource dataSource) {
         ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
         populator.addScript(new ClassPathResource("users.sql"));
         populator.addScript(new ClassPathResource("tasks.sql"));

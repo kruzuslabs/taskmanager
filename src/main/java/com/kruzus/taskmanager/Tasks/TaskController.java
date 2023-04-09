@@ -13,10 +13,10 @@ import java.util.Optional;
 @RequestMapping("tasks")
 public class TaskController {
 
-    @Autowired
+    
     protected final TaskRepository taskRepository;
 
-    
+    @Autowired
     public TaskController(TaskRepository taskRepository) {
         this.taskRepository = taskRepository;
     }
