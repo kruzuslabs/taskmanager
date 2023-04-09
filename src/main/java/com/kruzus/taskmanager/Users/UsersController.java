@@ -10,8 +10,10 @@ import java.util.Map;
 @RestController
 @RequestMapping("/users")
 public class UsersController {
-    private final UsersRepository userRepository;
+    
     @Autowired
+    private final UsersRepository userRepository;
+   
     public UsersController(UsersRepository userRepository) {
         this.userRepository = userRepository;
     }

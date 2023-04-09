@@ -10,12 +10,11 @@ import java.util.Optional;
 
 //@CrossOrigin
 @RestController
-@RequestMapping("/api/tasks")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@RequestMapping("tasks")
 public class TaskController {
 
-
-    private final TaskRepository taskRepository;
+    
+    protected final TaskRepository taskRepository;
 
     @Autowired
     public TaskController(TaskRepository taskRepository) {
@@ -24,10 +23,8 @@ public class TaskController {
 
     @GetMapping("/all")
     public List<TasksEntity> allTasks(){
-
-
-        return this.taskRepository.findOrderDescByID();
-}
+        return taskRepository.findAll(); 
+    }
 
 
     @GetMapping("/")

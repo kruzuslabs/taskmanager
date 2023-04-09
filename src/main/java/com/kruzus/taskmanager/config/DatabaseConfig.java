@@ -16,7 +16,7 @@ public class DatabaseConfig {
     public DataSource dataSource() {
         return DataSourceBuilder.create()
                 .driverClassName("org.postgresql.Driver")
-                .url("jdbc:postgresql://localhost:6002/postgres")
+                .url("jdbc:postgresql://localhost:9050/tasksdb")
                 .username("postgres")
                 .password("postgrespw")
                 .build();
@@ -24,9 +24,14 @@ public class DatabaseConfig {
 
     @Bean
     public DataSourceInitializer dataSourceInitializer(DataSource dataSource) {
+        ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
+        populator.addScript(new ClassPathResource("users.sql"));
+        populator.addScript(new ClassPathResource("tasks.sql"));
+    
         DataSourceInitializer initializer = new DataSourceInitializer();
         initializer.setDataSource(dataSource);
-        initializer.setDatabasePopulator(new ResourceDatabasePopulator(new ClassPathResource("schema.sql")));
+        initializer.setDatabasePopulator(populator);
         return initializer;
     }
+    
 }
