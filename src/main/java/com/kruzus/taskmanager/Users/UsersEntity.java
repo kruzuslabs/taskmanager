@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "main_users", schema = "public", catalog = "postgres")
+@Table(name = "users", catalog = "tasksdb")
 public class UsersEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -77,10 +77,14 @@ public class UsersEntity {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         UsersEntity that = (UsersEntity) o;
-        return userid == that.userid && totaltasks == that.totaltasks && Objects.equals(username, that.username) && Objects.equals(fullname, that.fullname) && Objects.equals(password, that.password) && Objects.equals(joined, that.joined);
+        return userid == that.userid && totaltasks == that.totaltasks && Objects.equals(username, that.username)
+                && Objects.equals(fullname, that.fullname) && Objects.equals(password, that.password)
+                && Objects.equals(joined, that.joined);
     }
 
     @Override

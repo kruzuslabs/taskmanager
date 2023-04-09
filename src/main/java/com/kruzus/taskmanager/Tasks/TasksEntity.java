@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "tasks", schema = "public", catalog = "postgres")
+@Table(name = "tasks", schema = "public", catalog = "tasksdb")
 public class TasksEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -18,10 +18,10 @@ public class TasksEntity {
     @Column(name = "body", nullable = true, length = -1)
     private String body;
     @Basic
-    @Column(name = "due_date", nullable = false, length = -1)
+    @Column(name = "dueDate", nullable = false, length = -1)
     private String dueDate;
     @Basic
-    @Column(name = "time_posted", nullable = false, length = -1)
+    @Column(name = "timePosted", nullable = false, length = -1)
     private String timePosted;
     @Basic
     @Column(name = "completed", nullable = false)
