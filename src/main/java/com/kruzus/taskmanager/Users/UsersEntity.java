@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "users", catalog = "tasksdb")
+@Table(name = "users", schema = "public", catalog = "tasksdb")
 public class UsersEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -24,8 +24,8 @@ public class UsersEntity {
     @Column(name = "joined", nullable = false, length = -1)
     private String joined;
     @Basic
-    @Column(name = "totaltasks", nullable = false)
-    private short totaltasks;
+    @Column(name = "total_tasks", nullable = false)
+    private short total_tasks;
 
     public long getUserid() {
         return userid;
@@ -68,11 +68,11 @@ public class UsersEntity {
     }
 
     public short getTotaltasks() {
-        return totaltasks;
+        return total_tasks;
     }
 
     public void setTotaltasks(short totaltasks) {
-        this.totaltasks = totaltasks;
+        this.total_tasks = totaltasks;
     }
 
     @Override
@@ -82,13 +82,13 @@ public class UsersEntity {
         if (o == null || getClass() != o.getClass())
             return false;
         UsersEntity that = (UsersEntity) o;
-        return userid == that.userid && totaltasks == that.totaltasks && Objects.equals(username, that.username)
+        return userid == that.userid && total_tasks == that.total_tasks && Objects.equals(username, that.username)
                 && Objects.equals(fullname, that.fullname) && Objects.equals(password, that.password)
                 && Objects.equals(joined, that.joined);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userid, username, fullname, password, joined, totaltasks);
+        return Objects.hash(userid, username, fullname, password, joined, total_tasks);
     }
 }

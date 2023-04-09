@@ -18,11 +18,11 @@ public class TasksEntity {
     @Column(name = "body", nullable = true, length = -1)
     private String body;
     @Basic
-    @Column(name = "dueDate", nullable = false, length = -1)
-    private String dueDate;
+    @Column(name = "due_Date", nullable = false, length = -1)
+    private String due_date;
     @Basic
-    @Column(name = "timePosted", nullable = false, length = -1)
-    private String timePosted;
+    @Column(name = "time_Posted", nullable = false, length = -1)
+    private String time_posted;
     @Basic
     @Column(name = "completed", nullable = false)
     private boolean completed;
@@ -55,19 +55,19 @@ public class TasksEntity {
     }
 
     public String getDueDate() {
-        return dueDate;
+        return due_date;
     }
 
     public void setDueDate(String dueDate) {
-        this.dueDate = dueDate;
+        this.due_date = dueDate;
     }
 
     public String getTimePosted() {
-        return timePosted;
+        return time_posted;
     }
 
     public void setTimePosted(String timePosted) {
-        this.timePosted = timePosted;
+        this.time_posted = timePosted;
     }
 
     public boolean isCompleted() {
@@ -91,11 +91,11 @@ public class TasksEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TasksEntity that = (TasksEntity) o;
-        return id == that.id && completed == that.completed && severity == that.severity && Objects.equals(title, that.title) && Objects.equals(body, that.body) && Objects.equals(dueDate, that.dueDate) && Objects.equals(timePosted, that.timePosted);
+        return id == that.id && completed == that.completed && severity == that.severity && Objects.equals(title, that.title) && Objects.equals(body, that.body) && Objects.equals(due_date, that.due_date) && Objects.equals(time_posted, that.time_posted);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, body, dueDate, timePosted, completed, severity);
+        return Objects.hash(id, title, body, due_date, time_posted, completed, severity);
     }
 }
