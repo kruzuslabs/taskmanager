@@ -16,7 +16,7 @@ public class DatabaseConfig {
     public DataSource dataSource() {
         return DataSourceBuilder.create()
                 .driverClassName("org.postgresql.Driver")
-                .url("jdbc:postgresql://localhost:50420/tasksdb")
+                .url("jdbc:postgresql://localhost:9050/tasksdb")
                 .username("postgres")
                 .password("postgrespw")
                 .build();

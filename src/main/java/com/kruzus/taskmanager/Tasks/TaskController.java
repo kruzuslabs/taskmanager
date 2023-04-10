@@ -1,7 +1,8 @@
 package com.kruzus.taskmanager.Tasks;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,7 +11,8 @@ import java.util.Optional;
 
 //@CrossOrigin
 @RestController
-@RequestMapping("tasks")
+@RequestMapping("/api/tasks")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class TaskController {
 
     
@@ -22,8 +24,13 @@ public class TaskController {
     }
 
     @GetMapping("/all")
-    public List<TasksEntity> allTasks(){
-        return taskRepository.findAll(); 
+    public ResponseEntity<Object> getAllTasks() {
+        List<TasksEntity> tasks = this.taskRepository.findAll();
+        if (tasks.isEmpty()) {
+            return new ResponseEntity<>("Data is empty", HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(tasks, HttpStatus.OK);
+        }
     }
 
 
